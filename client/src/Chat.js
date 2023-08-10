@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './Chat.css'
 
 const Chat = ({socket, username, room}) => {
   const [currentMessage, setCurrentMessage] = useState('')
@@ -30,9 +31,9 @@ const Chat = ({socket, username, room}) => {
   }
 
   return (
-    <div className="chat-window">
+    <div className="chatWindow">
       <div className='chat-header'>
-        <p>Live Chat</p>
+        <p>Room: { room }</p>
       </div>
       <div className='chat-body'>
         {messageList.map((messageData) => {
@@ -42,11 +43,11 @@ const Chat = ({socket, username, room}) => {
               className={`message ${username === messageData.username ? 'me' : 'other'}`}
             >
               <div className='message-content'>
-                <p>{messageData.currentMessage}</p>
+                <span>{messageData.username}: </span>
+                <span>{messageData.currentMessage}</span>
               </div>
-              <div className='message-meta'>
-                <span>{messageData.username}</span>--
-                <span>{timeFormat(messageData.time)}</span>
+              <div className='message-time'>
+                <span>{ timeFormat(messageData.time) }</span>
               </div>
             </div>
           )
